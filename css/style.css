@@ -1,5 +1,5 @@
 body {
-  font-family: 'Press Start 2P', cursive;
+    font-family: 'Press Start 2P', cursive;
     color: white;
     background-color: black;
     font-size: 19px;
@@ -12,7 +12,7 @@ body {
     background-size: cover;
     background-position: center;
     margin-bottom: 16px;
-    animation: fadeIn 2.3s;
+    animation: fadeIn 4s;
     display:block;
   }
   @keyframes fadeIn{
@@ -91,9 +91,9 @@ body {
 	color: white;
 }
 .bubbon {
-background-color:darkred;
-color:#eee;
-border-color:crimson;
+  background-color:darkred;
+  color:#eee;
+  border-color:crimson;
 }
 @media (min-width:1062px) and (max-width:1500px){
     #health{

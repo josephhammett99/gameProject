@@ -36,7 +36,8 @@ function startBattle(id) {
 	addRound();
 	enemyMove(id);
 	healthChange();
-	gameOver();
+	healthChange2();
+	//gameOver();
 }
 //adds a round to the round counters
 function addRound() {
@@ -70,30 +71,48 @@ function roundResults(speech) {
 function healthChange() {
 	healthBar.style.width = health + "%";
 	enemyHealthBar.style.width =  enemyHealth + "%";
-}
-//end of battle
-function gameOver() {
-	if (health === 0 || enemyHealth === 0) {
-		speech = 'Game Over';
-		roundResults(speech);
-		attackButton.disabled = true;
-		counterButton.disabled = true;
-		playAgain.disabled = true;
+	if(enemyHealth === 0) {
+		scenario.six.buttons[0] = ["Next", "advanceTo(scenario.seven)"];
+		
+		requestAnimationFrame(advanceTo(scenario.six))
+	} else if (health === 0) {
+		console.log('gameover');
 	}
 }
+
+function healthChange2() {
+	healthBar.style.width = health + "%";
+	enemyHealthBar.style.width =  enemyHealth + "%";
+	if(enemyHealth === 0) {
+		scenario.oneFive.buttons[0] = ["Next", "advanceTo(scenario.oneSix)"];
+		
+		requestAnimationFrame(advanceTo(scenario.oneFive))
+	} else if (health === 0) {
+		console.log('gameover');
+	}
+}
+
+//end of battle
+// function gameOver() {
+// 	if (health === 0 || enemyHealth === 0) {
+// 		speech = 'Game Over';
+// 		roundResults(speech);
+// 		attackButton.disabled = true;
+// 		counterButtonattackButton.disabled = true;
+// 		playAgainattackButton.disabled = true;
+// 	}
+// }
 /////////
 // while (enemyHealth > 0){
 // 		advanceButton.style.display = 'none';
 // 	}
-function advanceNext() {
-	if (enemyHealth === 0) {
-		advanceButton.style.display = 'initial';
-		document.getElementsByClassName("bubbon")[0]
-		advanceButton.advanceTo(scenario.seven);
+// if (enemyHealth === 0) {
+// 	function advanceNext() {
 		
-	}
+		
+// 	}
 	
-}
+// }
 
 //takes moves of the player, generates one for enemy then runs the damage step
 function enemyMove(id) {
@@ -118,7 +137,7 @@ function damageStep(y, c) {
 			health -= 10;
 		} else {
 			enemyHealth = 0;
-			health = 5;
+			health = 100;
 		}
 	} else if ( y === 'counter' && c === 'counter') {
 		speech = 'You defend yourself';
@@ -202,7 +221,15 @@ var showBattleHUD = function (yesorno) {
 	}
 	
 }
-
+/*
+var battleAdvance = function (yayornay) {
+	if(yayornay === 'yes') {
+		battleAdvance.style.display = 'initial';
+	}
+	if (yayornay === 'no') {
+		battleAdvance.style.display = 'none';
+	}
+}*/
 
 //moves the game along
 var advanceTo = function(s) {
@@ -211,8 +238,6 @@ var advanceTo = function(s) {
   changeButtons(s.buttons)
   showBattleHUD(s.test)
 };
-
-
 
 
 
@@ -244,7 +269,7 @@ var scenario = {
 	six: {
 		image: src = "media/goatpxl.png",
 		text: "The Key Guardian attacks!",
-		buttons: [["Next", "advanceTo(scenario.seven)"]],
+		buttons: [], //[]
 		test: 'yes'
 	},
 	seven: {
@@ -276,7 +301,7 @@ var scenario = {
 		image: src = "media/apyrpxl.png",
 		text: "друг charges at full force!",
 		test: 'yes',
-		buttons: [["test", "advanceTo(scenario.oneSix)"]]
+		buttons: []
 	},
 	oneSix: {
 		text: "друг suffers a blow to the head and runs off. You see a key lying on the floor of the playroom. It has the word 'backdoor' written on it. Where should you go?",
