@@ -6,7 +6,7 @@ var savedEnemyMove;
 var health = 100; //player starting health
 var enemyHealth = 100; //enemy starting health
 var rounds = 0;
-var speech; //battle's direct dialogue
+var speech = ''; //battle's direct dialogue
 var attackButton = document.getElementById('dropkick'); //standard attack
 var counterButton = document.getElementById('counter'); //counter attack
 var healthBar = document.getElementById('healthBar');
@@ -20,7 +20,7 @@ battleHUD.style.display = 'none';
 let newgame = document.getElementById("start");
 //newgame.addEventListener("click", begin);
 //
-function begin () {
+function begin() {
 	document.getElementsByClassName("gameHUD")[0].style.display = "none";
 }
 //
@@ -66,31 +66,48 @@ function counter(y) {
 //dislpays results of the round
 function roundResults(speech) {
 	battleLog.innerHTML += speech + "<br>";
+
+	if (enemyHealth === 0) {
+		battleLog.innerHTML = ''
+	}
 }
 //changes the health percent after an action is performed
 function healthChange() {
 	healthBar.style.width = health + "%";
 	enemyHealthBar.style.width =  enemyHealth + "%";
 	if(enemyHealth === 0) {
-		scenario.six.buttons[0] = ["Next", "advanceTo(scenario.seven)"];
-		
+		scenario.six.buttons[0] = ["Next", "advanceTo(scenario.seven)"]
+		enemyHealth = 100;
+		enemyHealthBar.style.width =  enemyHealth + "%"; //resets battle
 		requestAnimationFrame(advanceTo(scenario.six))
+
+		// enemyHealth = 100;
+		// enemyHealthBar.style.width =  enemyHealth + "%";
+
 	} else if (health === 0) {
 		console.log('gameover');
 	}
 }
 
+// function reset(){
+// 	if(enemyHealth === 0){
+// 		document.getElementById("enemyHealth").reset();
+// 	}
+// };
+
+/*
 function healthChange2() {
 	healthBar.style.width = health + "%";
 	enemyHealthBar.style.width =  enemyHealth + "%";
 	if(enemyHealth === 0) {
 		scenario.oneFive.buttons[0] = ["Next", "advanceTo(scenario.oneSix)"];
-		
+		enemyHealth = 100;
+		enemyHealthBar.style.width =  enemyHealth + "%"; //resets battle
 		requestAnimationFrame(advanceTo(scenario.oneFive))
 	} else if (health === 0) {
 		console.log('gameover');
 	}
-}
+}*/
 
 //end of battle
 // function gameOver() {
@@ -152,7 +169,6 @@ function damageStep(y, c) {
 
 
 window.onload=enableButtons();
-
 
 /////////////////////////////////////GAME LOGIC////////////////////////////////////////
 
@@ -219,7 +235,6 @@ var showBattleHUD = function (yesorno) {
 	if (yesorno === 'no'){
 		battleHUD.style.display = 'none';
 	}
-	
 }
 /*
 var battleAdvance = function (yayornay) {
