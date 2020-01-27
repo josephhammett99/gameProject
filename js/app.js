@@ -36,7 +36,7 @@ function startBattle(id) {
 	addRound();
 	enemyMove(id);
 	healthChange();
-	healthChange2();
+	//healthChange2();
 	//gameOver();
 }
 //adds a round to the round counters
@@ -77,9 +77,11 @@ function healthChange() {
 	enemyHealthBar.style.width =  enemyHealth + "%";
 	if(enemyHealth === 0) {
 		scenario.six.buttons[0] = ["Next", "advanceTo(scenario.seven)"]
+		//scenario.oneFive.buttons[0] = ["Next", "advanceTo(scenario.oneSix)"]
 		enemyHealth = 100;
 		enemyHealthBar.style.width =  enemyHealth + "%"; //resets battle
 		requestAnimationFrame(advanceTo(scenario.six))
+		//requestAnimationFrame(advanceTo(scenario.oneFive))
 
 		// enemyHealth = 100;
 		// enemyHealthBar.style.width =  enemyHealth + "%";
@@ -202,22 +204,6 @@ var changeImage = function(img) {
 };
 
 
-/*
-function fadeIn(el, time){
-	el.style.opacity=0;
-	el.style.display="block";
-
-	var last = +new Date();
-	var tick = function() {
-		el.style.opacity = +el.style.opacity + (new Date() - last) / time;
-		last = +new Date();
-		if(+el.style.opacity < 1) {
-			(window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout (tick, 16)
-		}
-	};
-	tick();
-}*/
-
 
 var changeButtons = function(buttonList) {
   buttonBox.innerHTML = "";
@@ -236,15 +222,7 @@ var showBattleHUD = function (yesorno) {
 		battleHUD.style.display = 'none';
 	}
 }
-/*
-var battleAdvance = function (yayornay) {
-	if(yayornay === 'yes') {
-		battleAdvance.style.display = 'initial';
-	}
-	if (yayornay === 'no') {
-		battleAdvance.style.display = 'none';
-	}
-}*/
+
 
 //moves the game along
 var advanceTo = function(s) {
@@ -256,7 +234,7 @@ var advanceTo = function(s) {
 
 
 
-//Text nodes for the game logic because I didnt wanna lose my sanity
+//Text nodes
 
 var scenario = {
 	one: {
@@ -350,7 +328,63 @@ var scenario = {
 		buttons: [["Next", "advanceTo(scenario.oneThirteen)"]]
 	},
 	oneThirteen: {
-		test: ":D"
+		test: "no"
+	},
+	twoOne: {
+		text: "You make your way towards the buffet stand. A man holding an overloaded hibachi plate spots you. What will you do?",
+		buttons: [["Run", "advanceTo(scenario.twoTwo)"],["FIGHT", "advanceTo(scenario.twoThree)"]]
+	},
+	twoTwo: {
+		text: "You try to run away, but the man catches up to you and corners you!",
+		buttons: [["Next", "advanceTo(scenario.twoThree)"]]
+	},
+	twoThree: {
+		text: "The man vigorously eats some rice...",
+		test: 'yes',
+		buttons: [["Next", "advanceTo(scenario.twoFour)"]]
+	},
+	twoFour: {
+		text: "You manage to make the man stumble, but the rice gives him power. You run away into the bathroom, and notice a blue glow among the darkness. What will you do?",
+		buttons: [["Approach", "advanceTo(scenario.twoFive)"]],
+		test:'no'
+	},
+	twoFive: {
+		text: 'You open the glowing stall and see a ghost. "I am the Toilet Guardian. I am binded by a contract to protect this toilet. Please help me escape."',
+		buttons: [["Flush", "advanceTo(scenario.twoSix)"], ["Free", "advanceTo(scenario.twoSeven)"]]
+	},
+	twoSix: {
+		text: "You flush the ghost down the toilet. You hear the echoes of a thousand screaming souls in damnation, followed by an explosion. GAME OVER"
+	},
+	twoSeven: {
+		text: "You free the ghost from the toilet. It thanks you profusely before flying off. You exit the bathroom, when suddenly...",
+		buttons: [["Next", "advanceTo(scenario.twoEight)"]]
+	},
+	twoEight: {
+		text: "The man is going in for seconds!",
+		test:'yes',
+		buttons:[["Next", "advanceTo(scenario.twoNine)"]]
+	},
+	twoNine: {
+		text: "You dropkick the man in the stomach, causing him the front door keys to drop from his shirt pocket. You grab the key to unlock the door and flee from the building.",
+		buttons:[["Continue", "advanceTo(scenario.twoTen)"]]
+	},
+	twoTen: {
+		text: "You exit the building and find yourself in the parking lot. Suddenly, a sense of impending doom lurks over you...",
+		buttons: [["Continue...", "advanceTo(scenario.twoEleven)"]]
+	},
+	twoEleven: {
+		image: src = "media/cyberpxl.png",
+		text: "VROOM VROOM",
+		test: 'yes',
+		buttons: [["Next", "advanceTo(scenario.twoTwelve"]]
+	},
+	twoTwelve: {
+		text: "YOU WIN",
+		test:'no',
+		buttons: [["Next", "advanceTo(scenario.twoThirteen"]]
+	},
+	twoThirteen: {
+		test:'no'
 	}
 };
 
