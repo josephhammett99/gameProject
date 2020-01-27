@@ -353,6 +353,7 @@ var scenario = {
 		buttons: [["Flush", "advanceTo(scenario.twoSix)"], ["Free", "advanceTo(scenario.twoSeven)"]]
 	},
 	twoSix: {
+		image: src = "media/crowd2pxl.png",
 		text: "You flush the ghost down the toilet. You hear the echoes of a thousand screaming souls in damnation, followed by an explosion. GAME OVER"
 	},
 	twoSeven: {
