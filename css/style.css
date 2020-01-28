@@ -6,7 +6,6 @@ body {
     margin-left: 30%;
     margin-right:30%;
   }
-  
   #images {
     height: 500px;
     background-size: cover;
@@ -50,7 +49,7 @@ body {
 
 /*///////////////////Battle Styling///////////////////*/
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 
