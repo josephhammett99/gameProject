@@ -141,7 +141,6 @@ function enemyMove(id) {
 	} else {
 		savedEnemyMove = 'counter';
 	};
-	speech = ('your move is <span>'+ id + '</span> and the computers move is <span>' + savedEnemyMove + '</span> on round ' + rounds);
 	damageStep(id, savedEnemyMove);
 	roundResults(speech);
 
@@ -186,9 +185,9 @@ var protag;
 //name scenario starts, advances to next scenario on Enter
 input.onkeypress = function(event) {
   console.log(input.value);
-  if (event.key == "Enter" || event.keyCode == 13) {
+  if (event.key == "Enter" || event.keyCode == 13) { //keycode '13' equal to 'Enter' key
     protag =  input.value;
-    input.parentNode.removeChild(input)
+    input.parentNode.removeChild(input) //removes the input bar after first scenario
     advanceTo(scenario.two)
   }
 };
@@ -198,12 +197,9 @@ var changeText = function(words) {
   text.innerHTML = words.replace("Player", protag);
 };
 
-
 var changeImage = function(img) {
   images.style.backgroundImage = "url(" + img + ")";
 };
-
-
 
 var changeButtons = function(buttonList) {
   buttonBox.innerHTML = "";
@@ -369,7 +365,8 @@ var scenario = {
 	},
 	twoNine: {
 		text: "You dropkick the man in the stomach, causing the front door keys to drop from his shirt pocket. You grab the key to unlock the door and flee from the building.",
-		buttons:[["Continue", "advanceTo(scenario.twoTen)"]]
+		buttons:[["Continue", "advanceTo(scenario.twoTen)"]],
+		test:'no'
 	},
 	twoTen: {
 		text: "You exit the building and find yourself in the parking lot. Suddenly, a sense of impending doom lurks over you...",
@@ -379,12 +376,12 @@ var scenario = {
 		image: src = "media/cyberpxl.png",
 		text: "VROOM VROOM",
 		test: 'yes',
-		buttons: [["Next", "advanceTo(scenario.twoTwelve"]]
+		buttons: [["Next", "advanceTo(scenario.twoTwelve)"]]
 	},
 	twoTwelve: {
 		text: "YOU WIN",
 		test:'no',
-		buttons: [["Next", "advanceTo(scenario.twoThirteen"]]
+		buttons: [["Next", "advanceTo(scenario.twoThirteen)"]]
 	},
 	twoThirteen: {
 		test:'no'
