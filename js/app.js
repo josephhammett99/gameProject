@@ -161,10 +161,10 @@ function damageStep(y, c) {
 	} else if ( y === 'counter' && c === 'counter') {
 		speech = 'You defend yourself';
 	} else if ( y === 'dropkick' && c === 'counter') {
-		speech = 'Enemy readies itself for a counter attack';
+		speech = 'Enemy readies itself';
 		counter(y, c);
 	} else if ( y === 'counter' && c === 'dropkick') {
-		speech = 'You ready yourself for a counter attack';
+		speech = 'You ready yourself';
 		counter(y, c);
 	}
 }
@@ -335,7 +335,7 @@ var scenario = {
 		buttons: [["Run", "advanceTo(scenario.twoTwo)"],["FIGHT", "advanceTo(scenario.twoThree)"]]
 	},
 	twoTwo: {
-		text: "You try to run away, but the man catches up to you and corners you!",
+		text: "You try to run away, but the man catches up and corners you!",
 		buttons: [["Next", "advanceTo(scenario.twoThree)"]]
 	},
 	twoThree: {
@@ -344,11 +344,13 @@ var scenario = {
 		buttons: [["Next", "advanceTo(scenario.twoFour)"]]
 	},
 	twoFour: {
+		image: src = "media/glowpxl.png",
 		text: "You manage to make the man stumble, but the rice gives him power. You run away into the bathroom, and notice a blue glow among the darkness. What will you do?",
 		buttons: [["Approach", "advanceTo(scenario.twoFive)"]],
 		test:'no'
 	},
 	twoFive: {
+		image: src = "media/glowpxl.png",
 		text: 'You open the glowing stall and see a ghost. "I am the Toilet Guardian. I am binded by a contract to protect this toilet. Please help me escape."',
 		buttons: [["Flush", "advanceTo(scenario.twoSix)"], ["Free", "advanceTo(scenario.twoSeven)"]]
 	},
@@ -366,7 +368,7 @@ var scenario = {
 		buttons:[["Next", "advanceTo(scenario.twoNine)"]]
 	},
 	twoNine: {
-		text: "You dropkick the man in the stomach, causing him the front door keys to drop from his shirt pocket. You grab the key to unlock the door and flee from the building.",
+		text: "You dropkick the man in the stomach, causing the front door keys to drop from his shirt pocket. You grab the key to unlock the door and flee from the building.",
 		buttons:[["Continue", "advanceTo(scenario.twoTen)"]]
 	},
 	twoTen: {
