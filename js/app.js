@@ -2,7 +2,9 @@
 ////////////////////////////////BATTLE LOGIC///////////////////////////////////
 //var yourMove;
 var enemyMove;
+var enemyMove2;
 var savedEnemyMove;
+var savedEnemyMove2;
 var health = 100; //player starting health
 var enemyHealth = 100; //enemy starting health
 var rounds = 0;
@@ -18,6 +20,7 @@ var advanceButton = document.getElementById('advanceButton');
 var battleHUD = document.getElementsByClassName('battleHUD')[0]; //battle HUD
 battleHUD.style.display = 'none';
 let newgame = document.getElementById("start");
+let enable = 1;
 //newgame.addEventListener("click", begin);
 //
 function begin() {
@@ -32,144 +35,161 @@ function enableButtons() {
 
 
 //triggers the fight in the HTML
-function startBattle(id) {
-	addRound();
-	enemyMove(id);
-	healthChange();
-	//healthChange2();
-	//gameOver();
-}
-//adds a round to the round counters
-function addRound() {
-	rounds += 1;
-}
-
-//adds the counter action to attack
-function counter(y) {
-	var move = Math.floor((Math.random()*5));
-	if (move >= 3 && y === 'dropkick') {
-		speech = "Enemy counter successful! Took 10 damage";
-		health -= 10;
-	} else if (move >= 3 && y === 'counter') {
-		speech = "Player's counter successful! Enemy took 20 damage!";
-		enemyHealth -= 20;
-	} else if (move < 3 && y === 'dropkick') {
-		speech = "Counter failed! Dealt 15 damage";
-		enemyHealth -= 15;
-	} else if (move < 3 && y === 'counter') {
-		speech = "Player's counter failed! Dealt 15 damage";
-		health -= 15;
+	function startBattle(id) {
+		addRound();
+		enemyMove(id);
+		healthChange();
+		//healthChange2();
+		//gameOver();
 	}
-
-}
-
-//dislpays results of the round
-function roundResults(speech) {
-	battleLog.innerHTML += speech + "<br>";
-
-	if (enemyHealth === 0) {
-		battleLog.innerHTML = ''
+	//adds a round to the round counters
+	function addRound() {
+		rounds += 1;
 	}
-}
-//changes the health percent after an action is performed
-function healthChange() {
-	healthBar.style.width = health + "%";
-	enemyHealthBar.style.width =  enemyHealth + "%";
-	if(enemyHealth === 0) {
-		scenario.six.buttons[0] = ["Next", "advanceTo(scenario.seven)"]
-		//scenario.oneFive.buttons[0] = ["Next", "advanceTo(scenario.oneSix)"]
-		enemyHealth = 100;
-		enemyHealthBar.style.width =  enemyHealth + "%"; //resets battle
-		requestAnimationFrame(advanceTo(scenario.six))
-		//requestAnimationFrame(advanceTo(scenario.oneFive))
-
-		// enemyHealth = 100;
-		// enemyHealthBar.style.width =  enemyHealth + "%";
-
-	} else if (health === 0) {
-		console.log('gameover');
-	}
-}
-
-// function reset(){
-// 	if(enemyHealth === 0){
-// 		document.getElementById("enemyHealth").reset();
-// 	}
-// };
-
-/*
-function healthChange2() {
-	healthBar.style.width = health + "%";
-	enemyHealthBar.style.width =  enemyHealth + "%";
-	if(enemyHealth === 0) {
-		scenario.oneFive.buttons[0] = ["Next", "advanceTo(scenario.oneSix)"];
-		enemyHealth = 100;
-		enemyHealthBar.style.width =  enemyHealth + "%"; //resets battle
-		requestAnimationFrame(advanceTo(scenario.oneFive))
-	} else if (health === 0) {
-		console.log('gameover');
-	}
-}*/
-
-//end of battle
-// function gameOver() {
-// 	if (health === 0 || enemyHealth === 0) {
-// 		speech = 'Game Over';
-// 		roundResults(speech);
-// 		attackButton.disabled = true;
-// 		counterButtonattackButton.disabled = true;
-// 		playAgainattackButton.disabled = true;
-// 	}
-// }
-/////////
-// while (enemyHealth > 0){
-// 		advanceButton.style.display = 'none';
-// 	}
-// if (enemyHealth === 0) {
-// 	function advanceNext() {
-		
-		
-// 	}
 	
-// }
-
-//takes moves of the player, generates one for enemy then runs the damage step
-function enemyMove(id) {
-	var move = Math.floor((Math.random()*4)+1);
-	if (move <= 3) {
-		savedEnemyMove =  'dropkick';
-	} else {
-		savedEnemyMove = 'counter';
-	};
-	damageStep(id, savedEnemyMove);
-	roundResults(speech);
-
-}
-
-//proccesses the moves to a result
-function damageStep(y, c) {
-	if ( y === 'dropkick' && c === 'dropkick') {
-		speech = 'Both parties took damage';
-		if (enemyHealth >= 15 && health >= 10) {
-			enemyHealth -= 15;
+	//adds the counter action to attack
+	function counter(y) {
+		var move = Math.floor((Math.random()*5));
+		if (move >= 3 && y === 'dropkick') {
+			speech = "Enemy counter successful! Took 10 damage";
 			health -= 10;
-		} else {
-			enemyHealth = 0;
-			health = 100;
+		} else if (move >= 3 && y === 'counter') {
+			speech = "Player's counter successful! Enemy took 20 damage!";
+			enemyHealth -= 20;
+		} else if (move < 3 && y === 'dropkick') {
+			speech = "Counter failed! Dealt 15 damage";
+			enemyHealth -= 15;
+		} else if (move < 3 && y === 'counter') {
+			speech = "Player's counter failed! Dealt 15 damage";
+			health -= 15;
 		}
-	} else if ( y === 'counter' && c === 'counter') {
-		speech = 'You defend yourself';
-	} else if ( y === 'dropkick' && c === 'counter') {
-		speech = 'Enemy readies itself';
-		counter(y, c);
-	} else if ( y === 'counter' && c === 'dropkick') {
-		speech = 'You ready yourself';
-		counter(y, c);
+	
 	}
-}
+	
+	//dislpays results of the round
+	function roundResults(speech) {
+		battleLog.innerHTML += speech + "<br>";
+	
+		if (enemyHealth === 0) {
+			battleLog.innerHTML = ''
+		}
+	}
+	//changes the health percent after an action is performed
+	function healthChange() {
+		healthBar.style.width = health + "%";
+		enemyHealthBar.style.width =  enemyHealth + "%";
+			if(enemyHealth === 0) {
+				if (enable == 1) {
+				scenario.six.buttons[0] = ["Next", "advanceTo(scenario.seven)"]
+				//scenario.oneFive.buttons[0] = ["Next", "advanceTo(scenario.oneSix)"]
+				enemyHealth = 100;
+				enemyHealthBar.style.width =  enemyHealth + "%"; //resets battle
+				enable = false;
+					requestAnimationFrame(advanceTo(scenario.six))
+					enable == 2;
+				} else if (enable == 2) {
+					scenario.oneFive.buttons[0] = ["Next", "advanceTo(scenario.oneSix)"]
+					//scenario.oneFive.buttons[0] = ["Next", "advanceTo(scenario.oneSix)"]
+					enemyHealth = 100;
+					enemyHealthBar.style.width =  enemyHealth + "%"; //resets battle
+					requestAnimationFrame(advanceTo(scenario.oneFive))
+
+				}
+		
+				// enemyHealth = 100;
+				// enemyHealthBar.style.width =  enemyHealth + "%";
+		
+			} else if (health === 0) {
+				console.log('gameover');
+			}
+
+	}
+	
+	
+	
+	//takes moves of the player, generates one for enemy then runs the damage step
+	function enemyMove(id) {
+		var move = Math.floor((Math.random()*4)+1);
+		if (move <= 3) {
+			savedEnemyMove =  'dropkick';
+		} else {
+			savedEnemyMove = 'counter';
+		};
+		damageStep(id, savedEnemyMove);
+		roundResults(speech);
+	
+	}
+	
+	//proccesses the moves to a result
+	function damageStep(y, c) {
+		if ( y === 'dropkick' && c === 'dropkick') {
+			speech = 'Both parties took damage';
+			if (enemyHealth >= 15 && health >= 10) {
+				enemyHealth -= 15;
+				health -= 10;
+			} else {
+				enemyHealth = 0;
+				health = 100;
+			}
+		} else if ( y === 'counter' && c === 'counter') {
+			speech = 'You defend yourself';
+		} else if ( y === 'dropkick' && c === 'counter') {
+			speech = 'Enemy readies itself';
+			counter(y, c);
+		} else if ( y === 'counter' && c === 'dropkick') {
+			speech = 'You ready yourself';
+			counter(y, c);
+		}
+	}
+
+
 
 
 window.onload=enableButtons();
+
+
+	// function startBattle2(id) {
+	// 	addRound2();
+	// 	enemyMove2(id);
+	// 	healthChange2();
+	// 	//healthChange2();
+	// 	//gameOver();
+	// }
+	// function addRound2() {
+	// 	rounds += 1;
+	// }
+	// function enemyMove2(id) {
+	// 	var move = Math.floor((Math.random()*4)+1);
+	// 	if (move <= 3) {
+	// 		savedEnemyMove2 =  'dropkick';
+	// 	} else {
+	// 		savedEnemyMove2 = 'counter';
+	// 	};
+	// 	damageStep(id, savedEnemyMove2);
+	// 	roundResults(speech);
+	
+	// }
+	// function healthChange2() {
+	// 	healthBar.style.width = health + "%";
+	// 	enemyHealthBar.style.width =  enemyHealth + "%";
+	// 	if(enemyHealth === 0) {
+	// 		scenario.oneFive.buttons[0] = ["Next", "advanceTo(scenario.oneSix)"]
+	// 		//scenario.oneFive.buttons[0] = ["Next", "advanceTo(scenario.oneSix)"]
+	// 		enemyHealth = 100;
+	// 		enemyHealthBar.style.width =  enemyHealth + "%"; //resets battle
+	// 		requestAnimationFrame(advanceTo(scenario.oneFive))
+	// 		//requestAnimationFrame(advanceTo(scenario.oneFive))
+	
+	// 		// enemyHealth = 100;
+	// 		// enemyHealthBar.style.width =  enemyHealth + "%";
+	
+	// 	} else if (health === 0) {
+	// 		console.log('gameover');
+	// 	}
+	// }
+
+
+
 
 /////////////////////////////////////GAME LOGIC////////////////////////////////////////
 
@@ -216,7 +236,7 @@ var showBattleHUD = function (yesorno) {
 	} 
 	if (yesorno === 'no'){
 		battleHUD.style.display = 'none';
-	}
+	} 
 }
 
 
@@ -231,7 +251,6 @@ var advanceTo = function(s) {
 
 
 //Text nodes
-
 var scenario = {
 	one: {
 		image: src = "media/greenbeanpxl.png",
@@ -289,8 +308,8 @@ var scenario = {
 	oneFive: {
 		image: src = "media/apyrpxl.png",
 		text: "друг charges at full force!",
-		test: 'yes',
-		buttons: []
+		buttons: [],
+		test: 'yes'
 	},
 	oneSix: {
 		text: "друг suffers a blow to the head and runs off. You see a key lying on the floor of the playroom. It has the word 'backdoor' written on it. Where should you go?",
