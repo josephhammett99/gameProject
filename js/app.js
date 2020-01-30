@@ -21,6 +21,7 @@ var battleHUD = document.getElementsByClassName('battleHUD')[0]; //battle HUD
 battleHUD.style.display = 'none';
 let newgame = document.getElementById("start");
 let enable = 1;
+//let enable = 2;
 //newgame.addEventListener("click", begin);
 //
 function begin() {
@@ -74,26 +75,34 @@ function enableButtons() {
 			battleLog.innerHTML = ''
 		}
 	}
-	//changes the health percent after an action is performed
+	
 	function healthChange() {
 		healthBar.style.width = health + "%";
 		enemyHealthBar.style.width =  enemyHealth + "%";
 			if(enemyHealth === 0) {
 				if (enable == 1) {
-				scenario.six.buttons[0] = ["Next", "advanceTo(scenario.seven)"]
-				//scenario.oneFive.buttons[0] = ["Next", "advanceTo(scenario.oneSix)"]
-				enemyHealth = 100;
-				enemyHealthBar.style.width =  enemyHealth + "%"; //resets battle
-				enable = false;
+					scenario.six.buttons[0] = ["Next", "advanceTo(scenario.seven)"]
+					//scenario.oneFive.buttons[0] = ["Next", "advanceTo(scenario.oneSix)"]
+					enemyHealth = 100;
+					enemyHealthBar.style.width =  enemyHealth + "%"; //resets battle
+					// enable = false;
+					enable = 2;
 					requestAnimationFrame(advanceTo(scenario.six))
-					enable == 2;
 				} else if (enable == 2) {
 					scenario.oneFive.buttons[0] = ["Next", "advanceTo(scenario.oneSix)"]
 					//scenario.oneFive.buttons[0] = ["Next", "advanceTo(scenario.oneSix)"]
 					enemyHealth = 100;
 					enemyHealthBar.style.width =  enemyHealth + "%"; //resets battle
+					// enable = false;
+					enable = 3;
 					requestAnimationFrame(advanceTo(scenario.oneFive))
-
+				} else if (enable == 3) {
+					scenario.oneEleven.buttons[0] = ["Next", "advanceTo(scenario.oneTwelve)"]
+					//scenario.oneFive.buttons[0] = ["Next", "advanceTo(scenario.oneSix)"]
+					enemyHealth = 100;
+					enemyHealthBar.style.width =  enemyHealth + "%"; //resets battle
+					enable = 4;
+					requestAnimationFrame(advanceTo(scenario.oneEleven))
 				}
 		
 				// enemyHealth = 100;
@@ -105,7 +114,18 @@ function enableButtons() {
 
 	}
 	
-	
+	/*function healthChange2() {
+		healthBar.style.width = health + "%";
+		enemyHealthBar.style.width =  enemyHealth + "%";
+			if(enemyHealth === 0) {
+				if (enable2 == 1) {
+				scenario.twoThree.buttons[0] = ["Next", "advanceTo(scenario.twoFour)"]
+				//scenario.oneFive.buttons[0] = ["Next", "advanceTo(scenario.oneSix)"]
+				enemyHealth = 100;
+				enemyHealthBar.style.width =  enemyHealth + "%"; //resets battle
+				enable = false;
+					requestAnimationFrame(advanceTo(scenario.twoThree))
+				}}}*/
 	
 	//takes moves of the player, generates one for enemy then runs the damage step
 	function enemyMove(id) {
@@ -335,7 +355,7 @@ var scenario = {
 		image: src = "media/cyberpxl.png",
 		text: "test",
 		test: 'yes',
-		buttons: [["Next", "advanceTo(scenario.oneTwelve)"]]
+		buttons: []//[["Next", "advanceTo(scenario.oneTwelve)"]]
 	},
 	oneTwelve: {
 		text: "YOU WIN",
@@ -356,7 +376,7 @@ var scenario = {
 	twoThree: {
 		text: "The man vigorously eats some rice...",
 		test: 'yes',
-		buttons: [["Next", "advanceTo(scenario.twoFour)"]]
+		buttons: []//[["Next", "advanceTo(scenario.twoFour)"]]
 	},
 	twoFour: {
 		image: src = "media/glowpxl.png",
