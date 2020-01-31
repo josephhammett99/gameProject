@@ -82,6 +82,7 @@ function enableButtons() {
 			if(enemyHealth === 0) {
 				if (enable == 1) {
 					scenario.six.buttons[0] = ["Next", "advanceTo(scenario.seven)"]
+					scenario.six.text = "Key Guardian was defeated!"
 					//scenario.oneFive.buttons[0] = ["Next", "advanceTo(scenario.oneSix)"]
 					enemyHealth = 100;
 					enemyHealthBar.style.width =  enemyHealth + "%"; //resets battle
@@ -90,6 +91,7 @@ function enableButtons() {
 					requestAnimationFrame(advanceTo(scenario.six))
 				} else if (enable == 2) {
 					scenario.oneFive.buttons[0] = ["Next", "advanceTo(scenario.oneSix)"]
+					scenario.oneFive.text = "..."
 					//scenario.oneFive.buttons[0] = ["Next", "advanceTo(scenario.oneSix)"]
 					enemyHealth = 100;
 					enemyHealthBar.style.width =  enemyHealth + "%"; //resets battle
@@ -98,13 +100,17 @@ function enableButtons() {
 					requestAnimationFrame(advanceTo(scenario.oneFive))
 				} else if (enable == 3) {
 					scenario.oneEleven.buttons[0] = ["Next", "advanceTo(scenario.oneTwelve)"]
+					scenario.oneEleven.text = "Enemy Defeated!"
 					//scenario.oneFive.buttons[0] = ["Next", "advanceTo(scenario.oneSix)"]
 					enemyHealth = 100;
 					enemyHealthBar.style.width =  enemyHealth + "%"; //resets battle
 					enable = 4;
 					requestAnimationFrame(advanceTo(scenario.oneEleven))
-				}
-		
+				} 
+
+
+
+			
 				// enemyHealth = 100;
 				// enemyHealthBar.style.width =  enemyHealth + "%";
 		
@@ -113,6 +119,7 @@ function enableButtons() {
 			}
 
 	}
+
 	
 	/*function healthChange2() {
 		healthBar.style.width = health + "%";
@@ -166,6 +173,7 @@ function enableButtons() {
 
 
 window.onload=enableButtons();
+
 
 
 	// function startBattle2(id) {
@@ -353,7 +361,7 @@ var scenario = {
 	},
 	oneEleven: {
 		image: src = "media/cyberpxl.png",
-		text: "test",
+		text: "VROOM VROOM",
 		test: 'yes',
 		buttons: []//[["Next", "advanceTo(scenario.oneTwelve)"]]
 	},
@@ -374,6 +382,7 @@ var scenario = {
 		buttons: [["Next", "advanceTo(scenario.twoThree)"]]
 	},
 	twoThree: {
+		image: src = "media/mrxxpxl.png",
 		text: "The man vigorously eats some rice...",
 		test: 'yes',
 		buttons: []//[["Next", "advanceTo(scenario.twoFour)"]]
@@ -391,13 +400,14 @@ var scenario = {
 	},
 	twoSix: {
 		image: src = "media/crowd2pxl.png",
-		text: "You flush the ghost down the toilet. You hear the echoes of a thousand screaming souls in damnation, followed by an explosion. GAME OVER"
+		text: "You flush the ghost down the toilet. You hear the echoes of a thousand souls. GAME OVER"
 	},
 	twoSeven: {
 		text: "You free the ghost from the toilet. It thanks you profusely before flying off. You exit the bathroom, when suddenly...",
 		buttons: [["Next", "advanceTo(scenario.twoEight)"]]
 	},
 	twoEight: {
+		image: src = "media/mrxxpxl.png",
 		text: "The man is going in for seconds!",
 		test:'yes',
 		buttons:[["Next", "advanceTo(scenario.twoNine)"]]
