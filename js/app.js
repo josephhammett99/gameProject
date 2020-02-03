@@ -1,4 +1,3 @@
-
 ////////////////////////////////BATTLE LOGIC///////////////////////////////////
 //var yourMove;
 var enemyMove;
@@ -149,27 +148,6 @@ function damageStep(y, c) {
 
 
 window.onload = enableButtons();
-
-
-// }
-// function healthChange2() {
-// 	healthBar.style.width = health + "%";
-// 	enemyHealthBar.style.width =  enemyHealth + "%";
-// 	if(enemyHealth === 0) {
-// 		scenario.oneFive.buttons[0] = ["Next", "advanceTo(scenario.oneSix)"]
-// 		//scenario.oneFive.buttons[0] = ["Next", "advanceTo(scenario.oneSix)"]
-// 		enemyHealth = 100;
-// 		enemyHealthBar.style.width =  enemyHealth + "%"; //resets battle
-// 		requestAnimationFrame(advanceTo(scenario.oneFive))
-// 		//requestAnimationFrame(advanceTo(scenario.oneFive))
-
-// 		// enemyHealth = 100;
-// 		// enemyHealthBar.style.width =  enemyHealth + "%";
-
-// 	} else if (health === 0) {
-// 		console.log('gameover');
-// 	}
-// }
 
 
 /////////////////////////////////////GAME LOGIC////////////////////////////////////////
