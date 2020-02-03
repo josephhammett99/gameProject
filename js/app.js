@@ -22,11 +22,6 @@ let enable = 1;
 //
 
 
-function begin() {
-	document.getElementsByClassName("gameHUD")[0].style.display = "none";
-}
-
-
 function enableButtons() {
 	attackButton.disabled = false;
 	counterButton.disabled = false;
@@ -38,7 +33,6 @@ function startBattle(id) {
 	addRound();
 	enemyMove(id);
 	healthChange();
-	//healthChange2();
 	//gameOver();
 }
 //adds a round to the round counters
@@ -69,8 +63,7 @@ function counter(y) {
 
 //dislpays results of the round
 function roundResults(speech) {
-	battleLog.innerHTML += speech + "<br>";
-
+	battleLog.innerHTML += speech + '<br>';
 	if (enemyHealth === 0) {
 		battleLog.innerHTML = ''
 	}
@@ -129,7 +122,6 @@ function enemyMove(id) {
 	};
 	damageStep(id, savedEnemyMove);
 	roundResults(speech);
-
 }
 
 

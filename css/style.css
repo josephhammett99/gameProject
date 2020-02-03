@@ -49,7 +49,7 @@ body {
 
 /*///////////////////Battle Styling///////////////////*/
 * {
-  box-sizing: border-box;
+  box-sizing: border-box; /*universal selector*/
 }
 
 
@@ -116,5 +116,4 @@ body {
       margin-bottom:40px;
       margin-top:-28px;
     }
-  }
-  
+  } 
