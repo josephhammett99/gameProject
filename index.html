@@ -20,25 +20,23 @@
         </div>
     </div>
 
-
     <!--Game HUD-->
     <div class="container">
         <div class="row">
-            <div class=" col-sm-12 gameHUD hidden">
+            <div class="col-sm-12 gameHUD hidden">
                 <div id="images"></div>
                 <div id="text"></div>
-                <!-- <button id="advanceBattle" class="bubbon2">Advance</button> -->
                 <input id="input" onkeydown='submitName(this)' placeholder='Your Name?'>
                 <div id="buttonBox"></div>
             </div>
             <div class="row">
                 <div class="col-sm-12 battleHUD">
+
                     <!--Battle HUD-->
                     <button id="dropkick" class="bubbon" onClick="startBattle(id)">Dropkick</button>
                     <button id="counter" class="bubbon" onClick="startBattle(id)">Counter</button>
-                    <div id="health"class="button-slanted"><div id="healthBar"class="button-slanted"></div></div>
-                    <div id="enemyHealth"class="button-slanted"><div id="enemyHealthBar"class="button-slanted"></div></div>
-                    <!-- <button id="advanceButton" class="bubbon" onClick="advanceNext()">Advance</button> -->
+                    <div id="health" class="button-slanted"><div id="healthBar" class="button-slanted"></div></div>
+                    <div id="enemyHealth" class="button-slanted"><div id="enemyHealthBar" class="button-slanted"></div></div>
                     <div id="dialogueBox"></div>
                </div>
             </div>

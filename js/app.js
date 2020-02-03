@@ -104,10 +104,18 @@ function healthChange() {
 			enemyHealthBar.style.width = enemyHealth + "%"; //resets battle
 			enable = 4;
 			requestAnimationFrame(advanceTo(scenario.oneEleven))
-		}
+		} else if (enable == 4) {
+			scenario.twoThree.buttons[0] = ["Next", "advanceTo(scenario.twoFour)"]
+			scenario.twoThree.text = "Enemy Defeated!"
+			enemyHealth = 100;
+			enemyHealthBar.style.width = enemyHealth + "%"; //resets battle
+			enable == 5;
+			requestAnimationFrame(advanceTo(scenario.twoThree))
+		
 	} else if (health === 0) {
 		console.log('gameover');
 	}
+  }
 }
 
 
@@ -151,26 +159,6 @@ function damageStep(y, c) {
 window.onload = enableButtons();
 
 
-// function startBattle2(id) {
-// 	addRound2();
-// 	enemyMove2(id);
-// 	healthChange2();
-// 	//healthChange2();
-// 	//gameOver();
-// }
-// function addRound2() {
-// 	rounds += 1;
-// }
-// function enemyMove2(id) {
-// 	var move = Math.floor((Math.random()*4)+1);
-// 	if (move <= 3) {
-// 		savedEnemyMove2 =  'dropkick';
-// 	} else {
-// 		savedEnemyMove2 = 'counter';
-// 	};
-// 	damageStep(id, savedEnemyMove2);
-// 	roundResults(speech);
-
 // }
 // function healthChange2() {
 // 	healthBar.style.width = health + "%";
@@ -195,8 +183,8 @@ window.onload = enableButtons();
 /////////////////////////////////////GAME LOGIC////////////////////////////////////////
 
 
-var images = document.getElementById("images");
-var text = document.getElementById("text");
+var images = document.getElementById('images');
+var text = document.getElementById('text');
 var buttonBox = document.getElementById('buttonBox');
 var input = document.getElementById('input');
 //variable for the name of the character
@@ -231,7 +219,6 @@ var changeButtons = function (buttonList) {
 
 //displays battle HUD in specific scenarios
 var showBattleHUD = function (yesorno) {
-
 	if (yesorno === 'yes') {
 		battleHUD.style.display = 'initial';
 	}
