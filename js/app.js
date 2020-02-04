@@ -32,7 +32,7 @@ function startBattle(id) {
 	addRound();
 	enemyMove(id);
 	healthChange();
-	//gameOver();
+	gameOver();
 }
 //adds a round to the round counters
 function addRound() {
@@ -294,7 +294,7 @@ var scenario = {
 		buttons: []
 	},
 	oneTwelve: {
-		text: "YOU WIN",
+		text: "Player reports back to the governor and earns a bucket of chicken wings. YOU WIN",
 		test: 'no',
 		buttons: [["Next", "advanceTo(scenario.oneThirteen)"]]
 	},
@@ -356,7 +356,7 @@ var scenario = {
 		buttons: [["Next", "advanceTo(scenario.twoTwelve)"]]
 	},
 	twoTwelve: {
-		text: "YOU WIN",
+		text: "Player reports back to the governor and earns a bucket of chicken wings. YOU WIN",
 		test: 'no',
 		buttons: [["Next", "advanceTo(scenario.twoThirteen)"]]
 	},

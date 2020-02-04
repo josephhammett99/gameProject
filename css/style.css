@@ -82,12 +82,16 @@ body {
 .button-slanted {
   transform: skewX(-20deg); /*skewX is what gives the nav buttons the slanted design.*/
 }
+
 #dialogueBox {
-	border: darkred 2px solid
+  /*border: darkred 2px solid*/
+  margin-top:-40px;
+  box-sizing:none;
+  font-size:10px;
 }
 
 #dialogueBox span {
-	color: white;
+  color: white;
 }
 .bubbon {
   background-color:darkred;
