@@ -1,23 +1,19 @@
 ////////////////////////////////BATTLE LOGIC///////////////////////////////////
-//var yourMove;
 var enemyMove;
 var savedEnemyMove;
 var health = 100; //player starting health
 var enemyHealth = 100; //enemy starting health
-var rounds = 0;
 var speech = ''; //battle's direct dialogue
 var attackButton = document.getElementById('dropkick'); //standard attack
 var counterButton = document.getElementById('counter'); //counter attack
 var healthBar = document.getElementById('healthBar');
 var enemyHealthBar = document.getElementById('enemyHealthBar');
 var battleLog = document.getElementById('dialogueBox'); //battle text
-var playAgain = document.getElementById('playAgain'); //restart battle
 var advanceTo = document.getElementById('advanceTo'); //advances to next scenario when enemy health hits 0
-var advanceButton = document.getElementById('advanceButton');
 var battleHUD = document.getElementsByClassName('battleHUD')[0]; //battle HUD
 battleHUD.style.display = 'none';
 let newgame = document.getElementById("start");
-let enable = 1;
+let enable = 1; //allows multiple battles
 //
 
 
@@ -28,31 +24,26 @@ function enableButtons() {
 
 
 //triggers the fight in the HTML
-function startBattle(id) {
-	addRound();
-	enemyMove(id);
+function startBattle(go) {
+	enemyMove(go);
 	healthChange();
 	gameOver();
-}
-//adds a round to the round counters
-function addRound() {
-	rounds += 1;
 }
 
 
 //adds the counter action to attack
-function counter(y) {
-	var move = Math.floor((Math.random() * 5));
-	if (move >= 3 && y === 'dropkick') {
+function counter(yu) {
+	var move = Math.floor((Math.random() * 5)); //  hit/miss ratio for yu counter
+	if (move >= 3 && yu === 'dropkick') {
 		speech = "Enemy counter successful! Took 10 damage";
 		health -= 10;
-	} else if (move >= 3 && y === 'counter') {
+	} else if (move >= 3 && yu === 'counter') {
 		speech = "Player's counter successful! Enemy took 20 damage!";
 		enemyHealth -= 20;
-	} else if (move < 3 && y === 'dropkick') {
+	} else if (move < 3 && yu === 'dropkick') {
 		speech = "Counter failed! Dealt 15 damage";
 		enemyHealth -= 15;
-	} else if (move < 3 && y === 'counter') {
+	} else if (move < 3 && yu === 'counter') {
 		speech = "Player's counter failed! Dealt 15 damage";
 		health -= 15;
 	}
@@ -60,7 +51,7 @@ function counter(y) {
 }
 
 
-//dislpays results of the round
+//dislpays results of battle
 function roundResults(speech) {
 	battleLog.innerHTML += speech + '<br>';
 	if (enemyHealth === 0) {
@@ -112,21 +103,21 @@ function healthChange() {
 
 
 //takes moves of the player, generates one for enemy then runs the damage step
-function enemyMove(id) {
-	var move = Math.floor((Math.random() * 4) + 1);
+function enemyMove(go) {
+	var move = Math.floor((Math.random() * 4) + 1); //enemy hit/miss ratio
 	if (move <= 3) {
 		savedEnemyMove = 'dropkick';
 	} else {
 		savedEnemyMove = 'counter';
 	};
-	damageStep(id, savedEnemyMove);
+	damageStep(go, savedEnemyMove);
 	roundResults(speech);
 }
 
 
 //proccesses the moves to a result
-function damageStep(y, c) {
-	if (y === 'dropkick' && c === 'dropkick') {
+function damageStep(yu, en) {
+	if (yu === 'dropkick' && en === 'dropkick') {
 		speech = 'Both parties took damage';
 		if (enemyHealth >= 15 && health >= 10) {
 			enemyHealth -= 15;
@@ -135,14 +126,14 @@ function damageStep(y, c) {
 			enemyHealth = 0;
 			health = 100;
 		}
-	} else if (y === 'counter' && c === 'counter') {
+	} else if (yu === 'counter' && en === 'counter') {
 		speech = 'You defend yourself';
-	} else if (y === 'dropkick' && c === 'counter') {
+	} else if (yu === 'dropkick' && en === 'counter') {
 		speech = 'Enemy readies itself';
-		counter(y, c);
-	} else if (y === 'counter' && c === 'dropkick') {
+		counter(yu, en);
+	} else if (yu === 'counter' && en === 'dropkick') {
 		speech = 'You ready yourself';
-		counter(y, c);
+		counter(yu, en);
 	}
 }
 
@@ -176,10 +167,12 @@ var changeText = function (words) {
 	text.innerHTML = words.replace("Player", protag);
 };
 
+//allows images to be switched within scenarios
 var changeImage = function (img) {
-	images.style.backgroundImage = "url(" + img + ")";
+	images.style.backgroundImage = "url(" + img + ")"; //id is being dynamically received
 };
 
+//allows buttons to be switched within scenarios
 var changeButtons = function (buttonList) {
 	buttonBox.innerHTML = "";
 	for (var i = 0; i < buttonList.length; i++) {
@@ -210,7 +203,7 @@ var advanceTo = function (s) {
 var scenario = {
 	one: {
 		image: src = "media/greenbeanpxl.png",
-		text: "What's your name, string bean?\n",
+		text: "What's your name, string bean?",
 	},
 	two: {
 		image: src = "media/elvispxl.png", //protag
@@ -231,7 +224,7 @@ var scenario = {
 		buttons: [["FIGHT", "advanceTo(scenario.six)"]]
 	},
 	six: {
-		image: src = "media/goatpxl.png",
+		image: src = "media/goatpxl.png", //enemy1
 		text: "The Key Guardian attacks!",
 		buttons: [],
 		test: 'yes'
@@ -262,7 +255,7 @@ var scenario = {
 		buttons: [["FIGHT", "advanceTo(scenario.oneFive)"]]
 	},
 	oneFive: {
-		image: src = "media/apyrpxl.png",
+		image: src = "media/apyrpxl.png", //enemy1-1
 		text: "друг charges at full force!",
 		buttons: [],
 		test: 'yes'
@@ -288,7 +281,7 @@ var scenario = {
 		buttons: [["Continue...", "advanceTo(scenario.oneEleven)"]]
 	},
 	oneEleven: {
-		image: src = "media/cyberpxl.png",
+		image: src = "media/cyberpxl.png", //enemy1-2
 		text: "VROOM VROOM",
 		test: 'yes',
 		buttons: []
@@ -310,7 +303,7 @@ var scenario = {
 		buttons: [["Next", "advanceTo(scenario.twoThree)"]]
 	},
 	twoThree: {
-		image: src = "media/mrxxpxl.png",
+		image: src = "media/mrxxpxl.png", //enemy2-1
 		text: "The man vigorously eats some rice...",
 		test: 'yes',
 		buttons: []
@@ -335,7 +328,7 @@ var scenario = {
 		buttons: [["Next", "advanceTo(scenario.twoEight)"]]
 	},
 	twoEight: {
-		image: src = "media/mrxxpxl.png",
+		image: src = "media/mrxxpxl.png", //enemy2-2
 		text: "The man is going in for seconds!",
 		test: 'yes',
 		buttons: [["Next", "advanceTo(scenario.twoNine)"]]
@@ -350,7 +343,7 @@ var scenario = {
 		buttons: [["Continue...", "advanceTo(scenario.twoEleven)"]]
 	},
 	twoEleven: {
-		image: src = "media/cyberpxl.png",
+		image: src = "media/cyberpxl.png",  //enemy2-3
 		text: "VROOM VROOM",
 		test: 'yes',
 		buttons: [["Next", "advanceTo(scenario.twoTwelve)"]]
